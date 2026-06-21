@@ -1,0 +1,114 @@
+body{
+
+    margin:0;
+
+    background:#080710;
+
+    color:white;
+
+    font-family:
+    'Outfit',
+    'Noto Sans KR',
+    'Noto Sans JP',
+    sans-serif;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+}
+
+header{
+
+    margin-top:40px;
+}
+
+h1{
+
+    font-size:40px;
+}
+
+.container{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
+}
+
+.quiz-container{
+
+    width:1000px;
+
+    max-width:90vw;
+
+    background:#131224;
+
+    padding:60px;
+
+    border-radius:36px;
+
+    text-align:center;
+}
+
+#question{
+
+    font-size:56px;
+
+    color:#fbbf24;
+
+    font-weight:800;
+
+    line-height:1.5;
+
+    min-height:120px;
+}
+
+#answer{
+
+    display:none;
+
+    margin-top:40px;
+}
+
+#answer.reveal{
+
+    display:block;
+}
+
+#jpText{
+
+    font-size:72px;
+
+    font-weight:800;
+
+    line-height:1.5;
+}
+
+button{
+
+    margin-top:30px;
+
+    font-size:24px;
+
+    padding:18px 40px;
+
+    border:none;
+
+    border-radius:50px;
+
+    cursor:pointer;
+}
+
+#nextBtn{
+
+    display:none;
+}
