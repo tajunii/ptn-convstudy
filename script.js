@@ -24,6 +24,7 @@ async function loadData() {
             return {
                 jp: cols[4] ? cols[4].replace(/['"]+/g, '').trim() : '',
                 kr: cols[5] ? cols[5].replace(/['"]+/g, '').trim() : ''
+                audio: cols[6] ? cols[6].replace(/['"]+/g, '').trim() : '' // 이 줄 추가
             };
         }).filter(item => item.jp && item.kr); // 빈 데이터 걸러내기
 
@@ -83,7 +84,10 @@ answerBtn.addEventListener("click", () => {
 
     jpTextEl.textContent = current.jp;
     answerEl.classList.add("reveal");
-    
+
+    if (current.audio) {
+        playJapaneseAudio(current.audio);    
+
     // 정답을 보여줄 때 일본어 음성 재생
     playJapaneseAudio(current.jp);
     
@@ -101,3 +105,12 @@ nextBtn.addEventListener("click", () => {
 
 // 앱 시작
 loadData();
+
+const audio = new Audio();
+
+function playJapaneseAudio(filename) {
+    if (!filename) return;
+    const audioUrl = `https://raw.githubusercontent.com/tajunii/ptn-convstudy/main/audio/${filename}`;
+    audio.src = audioUrl;
+    audio.play().catch(e => console.error("오디오 재생 실패:", e));
+}
