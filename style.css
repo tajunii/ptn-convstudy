@@ -101,3 +101,35 @@ button:focus, button:hover {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+#jpContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+#audioBtn {
+    margin-top: 0;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #fbbf24;
+
+    font-size: 34px;
+
+    cursor: pointer;
+}
+
+#audioBtn:hover,
+#audioBtn:focus {
+    background: transparent;
+
+    outline: none;
+
+    transform: scale(1.15);
+}
