@@ -47,7 +47,7 @@ function resetRemainingIndices() {
 
 function playJapaneseAudio(text) {
     // Web Speech API 대신 Google 번역의 오디오 스트림(MP3)을 임시로 재생합니다.
-    const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=ja&client=tw-ob`;
+    const audioUrl = `https://github.com/tajunii/ptn-convstudy/blob/main/audio/0001.mp3`;
     const audio = new Audio(audioUrl);
     audio.play().catch(e => console.error("음성 재생 실패:", e));
 }
