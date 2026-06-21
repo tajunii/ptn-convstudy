@@ -1,5 +1,5 @@
 const SHEET_URL =
-"여기에 CSV 공유 주소 입력";
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vRTUWrzsscnZ3sHRvSenqLY4o1c-mkvZLYV9GDTdhjvwkyBI7AYjkIRGFKX3Qjdftb7NL5m6HGnAYwS/pub?gid=1779898264&single=true&output=csv";
 
 let data = [];
 let current = null;
