@@ -134,3 +134,10 @@ button:focus, button:hover {
     transform: scale(1.15);
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+}
+
