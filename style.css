@@ -138,5 +138,19 @@ button:focus, button:hover {
     transform: scale(1.15);
 }
 
+/* 홈 버튼 개별 스타일 (배경 투명, 크기 축소) */
+#homeBtn {
+    margin-top: 0;
+    padding: 10px; /* 클릭하기 쉽도록 투명한 여백만 조금 줍니다 */
+    background-color: transparent;
+    font-size: 28px; /* 이모지 크기 지정 */
+}
+
+/* 홈 버튼에 마우스를 올리거나 포커스 되었을 때의 효과 */
+#homeBtn:focus, #homeBtn:hover {
+    background-color: transparent; /* 배경색 생기는 것 방지 */
+    outline: none; /* 노란색 테두리 방지 */
+    transform: scale(1.15); /* 살짝 커지는 효과만 유지 */
+}
 
 
