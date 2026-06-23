@@ -142,7 +142,6 @@ button:focus, button:hover {
 #homeBtn {
     margin-top: 0;
     padding: 10px; /* 클릭하기 쉽도록 투명한 여백만 조금 줍니다 */
-    background-color: transparent;
     font-size: 28px; /* 이모지 크기 지정 */
 }
 
