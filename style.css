@@ -1,155 +1,75 @@
-body {
-    margin: 0;
-    background: #080710;
-    color: white;
-    font-family: 'Outfit', 'Noto Sans KR', 'Noto Sans JP', sans-serif;
-    min-height: 100vh;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    background:linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b
+    );
+
+    color:white;
+
+    font-family:'Outfit','Noto Sans KR',sans-serif;
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+h1{
+
+    font-size:70px;
+
+    margin-bottom:60px;
+
+    font-weight:800;
+
+}
+
+.menu {
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-header {
-    margin-top: 40px;
-    display: flex;        /* 가로 정렬을 위해 추가 */
-    align-items: center;  /* 세로 중앙 정렬 */
-    gap: 15px;           /* 제목과 홈 버튼 사이 간격 */
-}
-
-h1 {
-    margin: 0;           /* 정렬이 틀어지지 않도록 기본 마진 제거 */
-    font-size: 40px;
-    color: #ffffff;
-    opacity: 0.8;
-}
-
-.container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.quiz-container {
-    width: 1000px;
-    max-width: 90vw;
-    background: #131224;
-    padding: 60px;
-    border-radius: 36px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-#question {
-    font-size: 44px;
-    color: #fbbf24;
-    font-weight: 800;
-    line-height: 1.5;
-    min-height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    word-break: keep-all;
-}
-
-#answer {
-    display: none;
-    margin-top: 40px;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-#answer.reveal {
-    display: block;
-}
-
-#jpText {
-    font-size: 44px;
-    font-weight: 800;
-    line-height: 1.5;
-    color: #ffffff;
+    align-items: center;       /* 가로 중앙 정렬 */
+    justify-content: center;    /* 세로 중앙 정렬 */
+    min-height: 100vh;         /* 화면 전체 높이를 확보하여 찌그러짐 방지 */
+    box-sizing: border-box;
 }
 
 button {
-    margin-top: 30px;
-    font-size: 28px;
+    width: 450px;
+    height: 100px;
+    border: none;
+    border-radius: 20px;
+    font-size: 36px;
     font-weight: 700;
-    padding: 20px 50px;
-    border: none;
-    border-radius: 50px;
     cursor: pointer;
-    background-color: #ffffff;
-    color: #131224;
-    transition: all 0.2s ease;
+    transition: 0.2s;
+
+    /* 🔥 [핵심 1] TV 브라우저에서 절대 압착되지 않도록 고정 */
+    flex-shrink: 0; 
+
+    /* 🔥 [핵심 2] gap 대신 구형 브라우저도 다 알아먹는 마진 사용 */
+    margin-bottom: 35px; 
 }
 
-/* 스마트TV 리모컨 조작을 위한 포커스 효과 */
-button:focus, button:hover {
-    outline: 6px solid #fbbf24;
-    outline-offset: 4px;
-    background-color: #e2e8f0;
-    transform: scale(1.05);
+/* 마지막 버튼은 아래 여백이 필요 없으므로 제거 */
+button:last-child {
+    margin-bottom: 0;
 }
 
-#nextBtn {
-    display: none;
-    background-color: #fbbf24;
+button:hover {
+    transform: scale(1.03);
 }
-
-#nextBtn:focus, #nextBtn:hover {
-    outline: 6px solid #ffffff;
-    background-color: #f59e0b;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-#jpContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-}
-
-#audioBtn {
-    margin-top: 0;
-
-    padding: 0;
-
-    border: none;
-
-    background: transparent;
-
-    color: #fbbf24;
-
-    font-size: 34px;
-
-    cursor: pointer;
-}
-
-#audioBtn:hover,
-#audioBtn:focus {
-    background: transparent;
-
-    outline: none;
-
-    transform: scale(1.15);
-}
-
-/* 홈 버튼 개별 스타일 (배경 투명, 크기 축소) */
-#homeBtn {
-    margin-top: 0;
-    padding: 10px; /* 클릭하기 쉽도록 투명한 여백만 조금 줍니다 */
-    font-size: 28px; /* 이모지 크기 지정 */
-}
-
-/* 홈 버튼에 마우스를 올리거나 포커스 되었을 때의 효과 */
-#homeBtn:focus, #homeBtn:hover {
-    background-color: transparent; /* 배경색 생기는 것 방지 */
-    outline: none; /* 노란색 테두리 방지 */
-    transform: scale(1.15); /* 살짝 커지는 효과만 유지 */
-}
-
 
