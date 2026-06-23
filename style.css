@@ -143,6 +143,7 @@ button:focus, button:hover {
     margin-top: 0;
     padding: 10px; /* 클릭하기 쉽도록 투명한 여백만 조금 줍니다 */
     font-size: 28px; /* 이모지 크기 지정 */
+    background: #080710;
 }
 
 /* 홈 버튼에 마우스를 올리거나 포커스 되었을 때의 효과 */
