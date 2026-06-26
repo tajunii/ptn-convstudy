@@ -1,5 +1,5 @@
 body {
-    margin-top: 20;
+    margin: 0;
     background: #080710;
     color: white;
     font-family: 'Outfit', 'Noto Sans KR', 'Noto Sans JP', sans-serif;
@@ -30,6 +30,7 @@ h1 {
 }
 
 .container {
+    margin-top: 20;
     flex: 1;
     display: flex;
     justify-content: center;
