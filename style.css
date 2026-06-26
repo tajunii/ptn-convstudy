@@ -177,8 +177,8 @@ button:focus, button:hover {
 }
 
 .bottom-menu {
-    margin-top: 60px;
+    margin-top: 0px;
     border-top: 1px solid #334155;
-    padding-top: 30px;
+    padding-top: 0px;
 }
 
