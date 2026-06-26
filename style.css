@@ -161,8 +161,8 @@ button:focus, button:hover {
 }
 
 #resetBtn {
-    margin: 10px 0 0 auto;
-    font-size: 18px;
+    margin-top: 10px;
+    font-size: 15px;
     padding: 12px 24px;
     background: transparent;
     color: #94a3b8;
@@ -177,7 +177,7 @@ button:focus, button:hover {
 }
 
 .bottom-menu {
-    margin-top: 20px;
+    margin: 20px 0 0 auto;
     border-top: 1px solid #334155;
     padding-top: 20px;
 }
