@@ -176,3 +176,9 @@ button:focus, button:hover {
     outline: none;
 }
 
+.bottom-menu {
+    margin-top: 60px;
+    border-top: 1px solid #334155;
+    padding-top: 30px;
+}
+
