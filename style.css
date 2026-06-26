@@ -18,8 +18,8 @@ header {
 
 h1 {
     margin: 0;           /* 정렬이 틀어지지 않도록 기본 마진 제거 */
-    font-size: 40px;
-    color: #ffffff;
+    font-size: 60px;
+    color: #D8C8FF;
     opacity: 0.8;
 }
 
@@ -179,7 +179,7 @@ button:focus, button:hover {
 .bottom-menu {
     display: flex;
     justify-content: flex-end;
-    margin-top: 30px;
+    margin-top: 40px;
     gap: 10px;
     border-top: 1px solid #334155;
     padding-top: 10px;
