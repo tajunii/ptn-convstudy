@@ -154,4 +154,25 @@ button:focus, button:hover {
     transform: scale(1.15); /* 살짝 커지는 효과만 유지 */
 }
 
+#progress {
+    margin-bottom: 25px;
+    font-size: 22px;
+    color: #cbd5e1;
+}
+
+#resetBtn {
+    margin-top: 50px;
+    font-size: 18px;
+    padding: 12px 24px;
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid #475569;
+}
+
+#resetBtn:hover,
+#resetBtn:focus {
+    background: #334155;
+    color: white;
+    outline: none;
+}
 

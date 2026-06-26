@@ -11,7 +11,10 @@ const answerBtn = document.getElementById("answerBtn");
 const answerEl = document.getElementById("answer");
 const jpTextEl = document.getElementById("jpText");
 const nextBtn = document.getElementById("nextBtn");
+const progressEl = document.getElementById("progress");
+const resetBtn = document.getElementById("resetBtn");
 const audioBtn = document.getElementById("audioBtn");
+const STORAGE_KEY = "quizProgress";
 
 // 오디오 객체
 const audio = new Audio();
@@ -67,8 +70,13 @@ async function loadData() {
 
         if (data.length > 0) {
 
-            resetRemainingIndices();
-            nextQuestion();
+            if (!loadProgress()) {
+
+                  resetRemainingIndices();
+
+              }
+
+nextQuestion();
 
         } else {
 
@@ -88,14 +96,52 @@ async function loadData() {
     }
 }
 
-
 // 한 바퀴용 문제 목록 생성
 function resetRemainingIndices() {
 
     remainingIndices = data.map((_, index) => index);
 
+    saveProgress();
+
+    updateProgress();
 }
 
+
+function saveProgress() {
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        remainingIndices: remainingIndices
+    }));
+
+}
+
+function updateProgress() {
+
+    const solved = data.length - remainingIndices.length;
+
+    progressEl.textContent =
+        `진행률 : ${solved} / ${data.length}`;
+
+}
+
+function loadProgress() {
+
+    const saved = localStorage.getItem(STORAGE_KEY);
+
+    if (!saved) return false;
+
+    const progress = JSON.parse(saved);
+
+    if (progress.remainingIndices &&
+        progress.remainingIndices.length > 0) {
+
+        remainingIndices = progress.remainingIndices;
+
+        return true;
+    }
+
+    return false;
+}
 
 // 다음 문제
 function nextQuestion() {
@@ -103,9 +149,13 @@ function nextQuestion() {
     // 한 바퀴 끝나면 다시 시작
     if (remainingIndices.length === 0) {
 
-        resetRemainingIndices();
+    alert("🎉 이번 회차를 모두 완료했습니다!\n새로운 순서로 다시 시작합니다.");
 
-    }
+    localStorage.removeItem(STORAGE_KEY);
+
+    resetRemainingIndices();
+
+}
 
     // 남은 문제 중 랜덤 선택
     const randomIndex =
@@ -115,8 +165,14 @@ function nextQuestion() {
 
     current = data[dataIndex];
 
+    if (!current) return;
+
     // 출제한 문제 제거
     remainingIndices.splice(randomIndex, 1);
+
+    saveProgress();
+
+    updateProgress();
 
     // 화면 초기화
     questionEl.textContent = current.kr;
@@ -165,6 +221,22 @@ audioBtn.addEventListener("click", () => {
 
 // 다음 문제
 nextBtn.addEventListener("click", () => {
+
+    nextQuestion();
+
+});
+
+resetBtn.addEventListener("click", () => {
+
+    if (!confirm("처음부터 다시 시작하시겠습니까?")) {
+
+        return;
+
+    }
+
+    localStorage.removeItem(STORAGE_KEY);
+
+    resetRemainingIndices();
 
     nextQuestion();
 
