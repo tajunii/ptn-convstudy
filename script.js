@@ -37,46 +37,32 @@ function playJapaneseAudio(filename) {
 
 // 데이터 로드
 async function loadData() {
-
     try {
-
         const response = await fetch(SHEET_URL);
         const csv = await response.text();
 
-        // 헤더 제거
-        const rows = csv.trim().split("\n").slice(1);
+        // CSV를 올바르게 파싱
+        const result = Papa.parse(csv, {
+            header: false,
+            skipEmptyLines: true
+        });
 
-        data = rows.map(row => {
+        // 첫 줄(헤더) 제외
+        const rows = result.data.slice(1);
 
-            const cols = row.split(",");
-
-            return {
-
-                jp: cols[4]
-                    ? cols[4].replace(/['"]+/g, "").trim()
-                    : "",
-
-                kr: cols[5]
-                    ? cols[5].replace(/['"]+/g, "").trim()
-                    : "",
-
-                audio: cols[6]
-                    ? cols[6].replace(/['"]+/g, "").trim()
-                    : ""
-
-            };
-
-        }).filter(item => item.jp && item.kr);
+        data = rows.map(cols => ({
+            jp: cols[4]?.trim() || "",
+            kr: cols[5]?.trim() || "",
+            audio: cols[6]?.trim() || ""
+        })).filter(item => item.jp && item.kr);
 
         if (data.length > 0) {
 
             if (!loadProgress()) {
+                resetRemainingIndices();
+            }
 
-                  resetRemainingIndices();
-
-              }
-
-nextQuestion();
+            nextQuestion();
 
         } else {
 
@@ -89,10 +75,9 @@ nextQuestion();
 
         console.error(error);
 
-        questionEl.textContent =
-            "데이터를 불러오는데 실패했습니다.";
-
+        questionEl.textContent = "데이터를 불러오는데 실패했습니다.";
         answerBtn.style.display = "none";
+
     }
 }
 
