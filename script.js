@@ -51,9 +51,9 @@ async function loadData() {
         const rows = result.data.slice(1);
 
         data = rows.map(cols => ({
-            jp: cols[4]?.trim() || "",
-            kr: cols[5]?.trim() || "",
-            audio: cols[6]?.trim() || ""
+            jp: cols[6]?.trim() || "",
+            kr: cols[7]?.trim() || "",
+            audio: cols[8]?.trim() || ""
         })).filter(item => item.jp && item.kr);
 
         if (data.length > 0) {
