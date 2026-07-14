@@ -5,31 +5,258 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Japanese TV Study Project</title>
 
-    <link rel="stylesheet" href="style.css">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-</head>
 
+    <style>
+        body {
+            margin: 0;
+            background: #080710;
+            color: white;
+            font-family: 'Outfit', 'Noto Sans KR', 'Noto Sans JP', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        header {
+            position: relative;
+            margin-top: 40px;
+            display: flex;
+            width: 100%;
+            align-items: center;
+            gap: 15px;
+            justify-content: flex-end;
+            padding-right: 40px;
+        }
+
+        h1 {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            margin: 0;
+            font-size: 50px;
+            color: #D8C8FF;
+            opacity: 0.8;
+        }
+
+        /* 주차 선택 드롭다운 스타일 */
+        #weekSelect {
+            font-size: 18px;
+            padding: 10px 15px;
+            border-radius: 12px;
+            background-color: #131224;
+            color: #cbd5e1;
+            border: 2px solid #475569;
+            cursor: pointer;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        #weekSelect:focus, #weekSelect:hover {
+            border-color: #fbbf24;
+            color: white;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .quiz-container {
+            width: 1000px;
+            max-width: 90vw;
+            background: #131224;
+            padding: 60px;
+            border-radius: 36px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        #question {
+            font-size: 44px;
+            color: #fbbf24;
+            font-weight: 800;
+            line-height: 1.5;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: keep-all;
+        }
+
+        #answer {
+            display: none;
+            margin-top: 40px;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        #answer.reveal {
+            display: block;
+        }
+
+        #jpText {
+            font-size: 44px;
+            font-weight: 800;
+            line-height: 1.5;
+            color: #ffffff;
+        }
+
+        button {
+            margin-top: 30px;
+            font-size: 28px;
+            font-weight: 700;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background-color: #ffffff;
+            color: #131224;
+            transition: all 0.2s ease;
+        }
+
+        button:focus, button:hover {
+            outline: 6px solid #fbbf24;
+            outline-offset: 4px;
+            background-color: #e2e8f0;
+            transform: scale(1.05);
+        }
+
+        /* 평가 버튼 컨테이너 (쉬움/어려움) */
+        #evaluationBtns {
+            display: none;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        #evaluationBtns button {
+            margin-top: 0;
+            font-size: 24px;
+            padding: 20px 40px;
+        }
+
+        /* 쉬움 버튼 (파란색 계열) */
+        #easyBtn {
+            background-color: #3b82f6;
+            color: white;
+        }
+
+        #easyBtn:focus, #easyBtn:hover {
+            outline-color: #93c5fd;
+            background-color: #2563eb;
+        }
+
+        /* 어려움 버튼 (주황/빨간색 계열) */
+        #hardBtn {
+            background-color: #f97316;
+            color: white;
+        }
+
+        #hardBtn:focus, #hardBtn:hover {
+            outline-color: #fdba74;
+            background-color: #ea580c;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #jpContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+        }
+
+        #audioBtn {
+            margin-top: 0;
+            padding: 0;
+            border: none;
+            background: transparent;
+            color: #fbbf24;
+            font-size: 34px;
+            cursor: pointer;
+        }
+
+        #audioBtn:hover,
+        #audioBtn:focus {
+            background: transparent;
+            outline: none;
+            transform: scale(1.15);
+        }
+
+        #homeBtn {
+            margin-top: 0;
+            padding: 10px;
+            font-size: 28px;
+            background: transparent;    
+            color: #ffffff;
+        }
+
+        #homeBtn:focus, #homeBtn:hover {
+            background-color: transparent;
+            outline: none;
+            transform: scale(1.15);
+        }
+
+        #progress {
+            margin-bottom: 25px;
+            font-size: 22px;
+            color: #cbd5e1;
+        }
+
+        #resetBtn {
+            margin-top: 10px;
+            font-size: 15px;
+            padding: 12px 24px;
+            background: transparent;
+            color: #94a3b8;
+            border: 1px solid #475569;
+        }
+
+        #resetBtn:hover,
+        #resetBtn:focus {
+            background: #334155;
+            color: white;
+            outline: none;
+        }
+
+        .bottom-menu {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 40px;
+            gap: 10px;
+            border-top: 1px solid #334155;
+            padding-top: 10px;
+        }
+    </style>
+</head>
 <body>
 
 <header class="header">
-
     <h1>문형 익히기</h1>
+    
+    <!-- 주차 선택 드롭다운 -->
+    <select id="weekSelect">
+        <option value="all">전체 데이터</option>
+    </select>
 
-    <button id="homeBtn">
-        🏠
-    </button>
-
+    <button id="homeBtn">🏠</button>
 </header>
 
 <div class="container">
-
     <div class="quiz-container">
-
         <div id="progress"></div>
+        
         <div id="question">
             문제를 불러오는 중입니다...
         </div>
@@ -39,35 +266,248 @@
         </button>
 
         <div id="answer">
-
             <div id="jpContainer">
-
                 <div id="jpText"></div>
-
-                <button id="audioBtn">
-                    🔊
-                </button>
-
+                <button id="audioBtn">🔊</button>
             </div>
-
         </div>
 
-        <button id="nextBtn">
-            다음 문제
-        </button>
+        <!-- 쉬움/어려움 평가 버튼 영역 (초기 숨김) -->
+        <div id="evaluationBtns">
+            <button id="easyBtn">쉬움 (다음엔 안 나옴)</button>
+            <button id="hardBtn">어려움 (다음에 또 나옴)</button>
+        </div>
 
-      <div class="bottom-menu">
-        <button id="resetBtn">
-        처음부터 다시 시작
-        </button>
-      </div>
-        
+        <div class="bottom-menu">
+            <button id="resetBtn">처음부터 다시 시작</button>
+        </div>
     </div>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-<script src="script.js"></script>
+<script>
+    const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRTUWrzsscnZ3sHRvSenqLY4o1c-mkvZLYV9GDTdhjvwkyBI7AYjkIRGFKX3Qjdftb7NL5m6HGnAYwS/pub?gid=1779898264&single=true&output=csv";
 
+    let data = [];
+    let remainingIndices = [];
+    let current = null;
+    let currentCategory = "all"; // 현재 선택된 주차
+    let lastIndex = -1; // 연속 출제 방지를 위한 이전 문제 인덱스 기록
+
+    // DOM 요소를 JS로 가져오기
+    const questionEl = document.getElementById("question");
+    const answerBtn = document.getElementById("answerBtn");
+    const answerEl = document.getElementById("answer");
+    const jpTextEl = document.getElementById("jpText");
+    const progressEl = document.getElementById("progress");
+    const resetBtn = document.getElementById("resetBtn");
+    const audioBtn = document.getElementById("audioBtn");
+    const weekSelect = document.getElementById("weekSelect");
+    const evaluationBtns = document.getElementById("evaluationBtns");
+    const easyBtn = document.getElementById("easyBtn");
+    const hardBtn = document.getElementById("hardBtn");
+    const STORAGE_KEY = "quizProgress";
+
+    const audio = new Audio();
+
+    // 오디오 재생 함수
+    function playJapaneseAudio(filename) {
+        if (!filename) return;
+        const audioUrl = `https://raw.githubusercontent.com/tajunii/ptn-convstudy/main/audio/${filename}`;
+        audio.src = audioUrl;
+        audio.play().catch(error => {
+            console.error("오디오 재생 실패:", error);
+        });
+    }
+
+    // 구글 시트 데이터 불러오기
+    async function loadData() {
+        try {
+            const response = await fetch(SHEET_URL);
+            const csv = await response.text();
+
+            const result = Papa.parse(csv, {
+                header: false,
+                skipEmptyLines: true
+            });
+
+            const rows = result.data.slice(1); // 첫 줄(헤더) 제외
+
+            // 배열 5번째(6열)에서 week 데이터를 가져옴
+            data = rows.map(cols => ({
+                week: cols[5]?.trim() || "", 
+                jp: cols[6]?.trim() || "",
+                kr: cols[7]?.trim() || "",
+                audio: cols[8]?.trim() || ""
+            })).filter(item => item.jp && item.kr);
+
+            if (data.length > 0) {
+                populateWeekSelect();
+                
+                if (!loadProgress()) {
+                    resetRemainingIndices();
+                } else {
+                    // 저장된 진행 상황이 있다면 해당 주차로 셀렉트 박스 맞춤
+                    weekSelect.value = currentCategory;
+                }
+                nextQuestion();
+            } else {
+                questionEl.textContent = "데이터를 찾을 수 없습니다.";
+                answerBtn.style.display = "none";
+            }
+        } catch (error) {
+            console.error(error);
+            questionEl.textContent = "데이터를 불러오는데 실패했습니다.";
+            answerBtn.style.display = "none";
+        }
+    }
+
+    // 드롭다운에 주차 옵션 채우기
+    function populateWeekSelect() {
+        const weeks = [...new Set(data.map(item => item.week).filter(Boolean))].sort();
+        weeks.forEach(w => {
+            const option = document.createElement("option");
+            option.value = w;
+            option.textContent = w; // 예: "1주차" 등 시트의 텍스트
+            weekSelect.appendChild(option);
+        });
+    }
+
+    // 현재 카테고리(주차)에 맞는 문제 인덱스 목록 생성
+    function resetRemainingIndices() {
+        remainingIndices = data
+            .map((item, index) => ({ item, index }))
+            .filter(obj => currentCategory === "all" || obj.item.week === currentCategory)
+            .map(obj => obj.index);
+        
+        lastIndex = -1; // 연속 방지 기록도 초기화
+        saveProgress();
+        updateProgress();
+    }
+
+    function saveProgress() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+            remainingIndices: remainingIndices,
+            category: currentCategory
+        }));
+    }
+
+    function updateProgress() {
+        const totalInCategory = data.filter(item => currentCategory === "all" || item.week === currentCategory).length;
+        const solved = totalInCategory - remainingIndices.length;
+        progressEl.textContent = `진행률 : ${solved} / ${totalInCategory}`;
+    }
+
+    function loadProgress() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return false;
+        
+        const progress = JSON.parse(saved);
+        if (progress.remainingIndices && progress.remainingIndices.length > 0) {
+            remainingIndices = progress.remainingIndices;
+            if (progress.category) {
+                currentCategory = progress.category;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    function nextQuestion() {
+        if (remainingIndices.length === 0) {
+            alert("🎉 해당 항목의 학습을 모두 완료했습니다!\n새로운 순서로 다시 시작합니다.");
+            localStorage.removeItem(STORAGE_KEY);
+            resetRemainingIndices();
+        }
+
+        let pool = remainingIndices;
+        
+        // 연속 출제 방지 로직 (남은 문제가 2개 이상일 때만 발동)
+        if (pool.length > 1 && lastIndex !== -1) {
+            pool = pool.filter(idx => idx !== lastIndex);
+        }
+
+        // 남은 풀 안에서 무작위 선택
+        const randomIndex = Math.floor(Math.random() * pool.length);
+        const dataIndex = pool[randomIndex];
+        
+        current = data[dataIndex];
+        lastIndex = dataIndex; // 방금 푼 문제 기록
+        
+        if (!current) return;
+
+        // UI 초기화
+        questionEl.textContent = current.kr;
+        answerEl.classList.remove("reveal");
+        answerBtn.style.display = "inline-block";
+        evaluationBtns.style.display = "none";
+        answerBtn.focus();
+    }
+
+    // [정답 보기] 버튼 클릭 이벤트
+    answerBtn.addEventListener("click", () => {
+        if (!current) return;
+        jpTextEl.textContent = current.jp;
+        answerEl.classList.add("reveal");
+        playJapaneseAudio(current.audio);
+        
+        answerBtn.style.display = "none";
+        evaluationBtns.style.display = "flex"; // 정답 후 쉬움/어려움 버튼 표시
+        easyBtn.focus();
+    });
+
+    audioBtn.addEventListener("click", () => {
+        if (!current) return;
+        playJapaneseAudio(current.audio);
+    });
+
+    // [쉬움] 클릭: 완벽히 아는 문제이므로 남은 목록에서 제거 후 다음 문제
+    easyBtn.addEventListener("click", () => {
+        const targetIdx = remainingIndices.indexOf(lastIndex);
+        if (targetIdx > -1) {
+            remainingIndices.splice(targetIdx, 1);
+        }
+        saveProgress();
+        updateProgress();
+        nextQuestion();
+    });
+
+    // [어려움] 클릭: 남은 목록에 그대로 두고(제거 안 함) 다음 문제
+    hardBtn.addEventListener("click", () => {
+        // splice를 하지 않으므로 배열에 남아있게 됨
+        nextQuestion();
+    });
+
+    // 주차(카테고리) 변경 시 이벤트
+    weekSelect.addEventListener("change", (e) => {
+        if (!confirm("항목을 변경하면 현재 진행 상황이 초기화됩니다. 변경하시겠습니까?")) {
+            weekSelect.value = currentCategory;
+            return;
+        }
+        currentCategory = e.target.value;
+        localStorage.removeItem(STORAGE_KEY);
+        resetRemainingIndices();
+        nextQuestion();
+    });
+
+    // [처음부터 다시 시작] 클릭 이벤트
+    resetBtn.addEventListener("click", () => {
+        if (!confirm("처음부터 다시 시작하시겠습니까?")) return;
+        localStorage.removeItem(STORAGE_KEY);
+        resetRemainingIndices();
+        nextQuestion();
+    });
+
+    // 앱 시작 시 데이터 로드
+    loadData();
+
+    // 홈 버튼 이벤트
+    const homeBtn = document.getElementById("homeBtn");
+    if (homeBtn) {
+        homeBtn.addEventListener("click", () => {
+            location.href = "https://tajunii.github.io/study-home/";
+        });
+    }
+</script>
 </body>
 </html>
